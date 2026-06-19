@@ -230,6 +230,14 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:22px 40px
   .container,.container-sm{padding:0 20px}
   section{padding:72px 0}
   footer{flex-direction:column;gap:10px;text-align:center}
+
+  /* Compare table mobile */
+  .compare-head{display:none}
+  .compare-row{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;padding:4px 0}
+  .cr-cell{border:none!important;padding:10px 12px!important;font-size:13px}
+  .cr-cell:nth-child(1){grid-column:1/-1;font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.06em;padding-bottom:4px!important}
+  .cr-cell:nth-child(2){background:rgba(255,255,255,.02);border-radius:8px 0 0 8px}
+  .cr-cell:nth-child(3){background:rgba(255,255,255,.05);border-radius:0 8px 8px 0}
 }
 </style>
 </head>
