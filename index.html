@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manuflow — Build AI employees in minutes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080808;
+  --bg2:#111111;
+  --bg3:#1a1a1a;
+  --border:rgba(255,255,255,0.09);
+  --border2:rgba(255,255,255,0.14);
+  --text:#f2f2f2;
+  --mid:#888888;
+  --light:#555555;
+  --green:#22c55e;
+  --red:#ef4444;
+  --purple:#a855f7;
+  --blue:#3b82f6;
+  --emerald:#22c55e;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:34px;height:34px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-name{font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.4px}
+.nav-btn{background:#fff;color:#000;border:none;padding:9px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:opacity .2s}
+.nav-btn:hover{opacity:.82}
+
+/* LAYOUT */
+.container{max-width:1080px;margin:0 auto;padding:0 40px}
+.container-sm{max-width:720px;margin:0 auto;padding:0 40px}
+section{padding:96px 0}
+
+/* SECTION LABELS */
+.label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.4px;color:var(--light);margin-bottom:14px}
+.section-title{font-size:42px;font-weight:800;letter-spacing:-1.2px;line-height:1.15;margin-bottom:16px;color:#fff}
+.section-sub{font-size:17px;color:var(--mid);line-height:1.75}
+
+/* HERO */
+#hero{padding-top:136px;padding-bottom:80px}
+.hero-grid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:48px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--border2);border-radius:100px;padding:5px 13px;font-size:12px;font-weight:500;color:var(--mid);margin-bottom:22px}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.hero-title{font-size:54px;font-weight:800;letter-spacing:-1.8px;line-height:1.15;margin-bottom:18px;color:#fff}
+.hero-sub{font-size:18px;color:var(--mid);line-height:1.7;margin-bottom:32px}
+.waitlist-wrap{display:flex;gap:8px;margin-bottom:12px;max-width:480px;margin-left:auto;margin-right:auto}
+.email-input{flex:1;padding:13px 16px;border:1.5px solid var(--border2);border-radius:10px;font-size:15px;font-family:inherit;color:#fff;background:var(--bg2);outline:none;transition:border-color .2s}
+.email-input:focus{border-color:rgba(255,255,255,.4)}
+.email-input::placeholder{color:var(--light)}
+.join-btn{background:#fff;color:#000;border:none;padding:13px 22px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:opacity .2s}
+.join-btn:hover{opacity:.82}
+.hero-note{font-size:13px;color:var(--light)}
+.success-msg{display:none;align-items:center;gap:8px;font-size:14px;color:var(--green);font-weight:500;margin-bottom:12px}
+.success-msg.show{display:flex}
+
+/* HERO MOCKUP FRAME */
+.hero-mockup-frame{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;overflow:hidden;width:100%}
+.mock-bar{background:var(--bg3);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:6px}
+.mock-dot{width:11px;height:11px;border-radius:50%}
+.mock-dot.r{background:#ff5f57}.mock-dot.y{background:#ffbd2e}.mock-dot.g{background:#28c840}
+.mock-bar-label{margin-left:10px;font-size:12px;font-weight:500;color:var(--mid)}
+
+/* VIDEO SLOTS */
+.video-slot{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;width:100%}
+.video-slot video{width:100%;height:100%;object-fit:cover;display:block}
+.video-slot-full{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:18px;overflow:hidden;aspect-ratio:16/9;margin-top:40px;display:flex;align-items:center;justify-content:center;position:relative}
+.video-slot-full video{width:100%;height:100%;object-fit:cover;display:block}
+
+/* TRUST BAR */
+#trust{padding:32px 0;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.trust-row{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:nowrap}
+.trust-heading{font-size:13px;font-weight:500;color:var(--mid);white-space:nowrap}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--text);white-space:nowrap}
+
+/* WHAT */
+#what .inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.check-list li{display:flex;align-items:flex-start;gap:12px;font-size:16px;color:#ccc}
+.chk{width:20px;height:20px;border-radius:50%;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:2px}
+
+/* Chat card */
+.chat-card{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;overflow:hidden}
+.cc-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.manu-av{width:30px;height:30px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cc-name{font-size:14px;font-weight:700;color:#fff}
+.cc-status{font-size:11.5px;color:var(--green);font-weight:500}
+.cc-body{padding:18px;display:flex;flex-direction:column;gap:12px}
+.msg{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55}
+.msg.u{background:var(--bg3);border:1px solid var(--border);align-self:flex-end;border-bottom-right-radius:3px;max-width:82%;color:#ccc}
+.msg.m{background:#fff;color:#000;align-self:flex-start;border-bottom-left-radius:3px;max-width:88%}
+.deploy-btn{display:inline-block;margin-top:10px;background:#000;color:#fff;border:1.5px solid rgba(0,0,0,.15);padding:7px 16px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer}
+
+/* HOW IT WORKS */
+#how{background:var(--bg2)}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.step-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px}
+.step-n{width:36px;height:36px;border-radius:10px;background:#fff;color:#000;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.step-title{font-size:17px;font-weight:700;margin-bottom:8px;color:#fff}
+.step-desc{font-size:14px;color:var(--mid);line-height:1.7}
+.step-pills{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px}
+.pill{background:var(--bg2);border:1px solid var(--border);padding:4px 10px;border-radius:100px;font-size:12px;font-weight:500;color:#aaa}
+
+/* LIVE ACTIVITY */
+#activity .section-sub{color:var(--mid)}
+.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:52px;align-items:start}
+.feed-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.feed-head{padding:13px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#fff}
+.feed-body{padding:6px 8px}
+.feed-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px}
+.adot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.adot.p{background:#a855f7}.adot.b{background:#3b82f6}.adot.g{background:#22c55e}.adot.gr{background:#6b7280}
+.fi-content{flex:1}
+.fi-agent{font-size:12px;font-weight:700;color:rgba(255,255,255,.9)}
+.fi-action{font-size:12px;color:rgba(255,255,255,.4);margin-top:1px}
+.fi-time{font-size:11px;color:rgba(255,255,255,.22);white-space:nowrap}
+.dash-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.dash-head{padding:13px 18px;border-bottom:1px solid var(--border);font-size:13px;font-weight:500;color:rgba(255,255,255,.4)}
+.dash-layout{display:grid;grid-template-columns:150px 1fr;min-height:280px}
+.dash-sidebar{border-right:1px solid var(--border);padding:14px 10px;display:flex;flex-direction:column;gap:3px}
+.si-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer}
+.si-item.active{background:rgba(255,255,255,.07)}
+.si-name{font-size:12px;font-weight:500;color:rgba(255,255,255,.7)}
+.dash-main{padding:16px;display:flex;flex-direction:column;gap:10px}
+.db{padding:9px 12px;border-radius:10px;font-size:12px;line-height:1.5}
+.db.u{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);align-self:flex-end;border-bottom-right-radius:3px;max-width:82%}
+.db.m{background:var(--bg3);border:1px solid var(--border);color:rgba(255,255,255,.7);align-self:flex-start;border-bottom-left-radius:3px;max-width:90%}
+
+/* WHY */
+#why{background:var(--bg2)}
+.compare-wrap{margin-top:48px;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.compare-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--bg3);border-bottom:1px solid var(--border)}
+.ch-cell{padding:16px 24px;font-size:13.5px;font-weight:700;color:#fff}
+.ch-cell:nth-child(2){border-left:1px solid var(--border);color:var(--mid)}
+.ch-cell:nth-child(3){border-left:1px solid var(--border);background:#fff;color:#000}
+.compare-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border)}
+.compare-row:last-child{border-bottom:none}
+.cr-cell{padding:14px 24px;font-size:14px;display:flex;align-items:center;gap:8px}
+.cr-cell:nth-child(1){color:#ccc;font-weight:500}
+.cr-cell:nth-child(2){border-left:1px solid var(--border);color:var(--mid)}
+.cr-cell:nth-child(3){border-left:1px solid var(--border);background:rgba(255,255,255,.04);font-weight:600;color:#fff}
+.xi{color:var(--red)}.ci{color:var(--green)}
+
+/* EXAMPLE */
+#example .section-title{color:#fff}
+.example-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:44px}
+.ex-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--light);margin-bottom:14px}
+.ex-title{font-size:22px;font-weight:800;margin-bottom:14px;letter-spacing:-.5px;color:#fff}
+.prob-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.prob-list li{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mid)}
+.prob-list li::before{content:"✕";color:var(--red);font-size:12px;font-weight:800}
+.agent-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.agent-list li{display:flex;align-items:center;gap:9px;font-size:14px;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:9px;font-weight:500;color:#ccc}
+.res-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.res-list li{display:flex;align-items:center;gap:8px;font-size:14px;color:#ccc}
+.res-list li::before{content:"✓";color:var(--green);font-weight:800}
+
+/* FAQ */
+#faq .section-title{color:#fff}
+.faq-list{margin-top:44px;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{width:100%;padding:20px 24px;text-align:left;background:none;border:none;font-family:inherit;font-size:15.5px;font-weight:600;color:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.faq-q:hover{background:var(--bg2)}
+.faq-chevron{font-size:17px;color:var(--light);transition:transform .3s}
+.faq-q.open .faq-chevron{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a.open{max-height:200px}
+.faq-a-inner{padding:0 24px 20px;font-size:15px;color:var(--mid);line-height:1.75}
+
+/* CTA */
+#cta{background:var(--bg2);border-top:1px solid var(--border);text-align:center}
+#cta .section-title{color:#fff;font-size:46px}
+#cta .section-sub{color:var(--mid);max-width:480px;margin:0 auto}
+.cta-checks{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin:24px 0 36px}
+.cta-chk{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--mid)}
+.cta-form{display:flex;gap:8px;max-width:460px;margin:0 auto 12px}
+.cta-input{flex:1;padding:13px 16px;border:1.5px solid var(--border2);border-radius:10px;font-size:15px;font-family:inherit;color:#fff;background:var(--bg3);outline:none;transition:border-color .2s}
+.cta-input:focus{border-color:rgba(255,255,255,.4)}
+.cta-input::placeholder{color:var(--light)}
+.cta-btn{background:#fff;color:#000;border:none;padding:13px 22px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:opacity .2s}
+.cta-btn:hover{opacity:.82}
+.cta-note{font-size:13px;color:var(--light)}
+.cta-success{display:none;align-items:center;gap:8px;justify-content:center;font-size:14px;color:var(--green);font-weight:500;margin-bottom:12px}
+.cta-success.show{display:flex}
+
+/* FOOTER */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:22px 40px;display:flex;align-items:center;justify-content:space-between}
+.foot-logo{display:flex;align-items:center;gap:8px}
+.foot-name{font-size:14px;font-weight:700;color:rgba(255,255,255,.4)}
+.foot-copy{font-size:13px;color:rgba(255,255,255,.22)}
+
+/* PULSE */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+
+/* WAVY UNDERLINE */
+.wave{
+  text-decoration: none;
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='8'%3E%3Cpath d='M0,4 C50,0 150,8 200,4' stroke='white' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: 200px 8px;
+  padding-bottom: 6px;
+  margin-bottom: 0px;
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:820px){
+  .hero-grid,#what .inner,.activity-grid,.example-card,.steps-grid{grid-template-columns:1fr;gap:36px}
+  .hero-title{font-size:38px}
+  .section-title{font-size:30px}
+  .waitlist-wrap,.cta-form{flex-direction:column}
+  .trust-row{gap:20px}
+  .dash-layout{grid-template-columns:1fr}
+  .dash-sidebar{display:none}
+  nav{padding:0 20px}
+  .container,.container-sm{padding:0 20px}
+  section{padding:72px 0}
+  footer{flex-direction:column;gap:10px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <polygon points="12,2 21,7 12,12 3,7" stroke="black" stroke-width="2" stroke-linejoin="round" fill="none"/>
+        <polyline points="3,12 12,17 21,12" stroke="black" stroke-width="2" stroke-linejoin="round" fill="none"/>
+        <polyline points="3,17 12,22 21,17" stroke="black" stroke-width="2" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <span class="logo-name">Manuflow</span>
+  </a>
+  <div style="display:flex;gap:10px;align-items:center">
+    <a href="dashboard.html" style="font-size:13px;color:#555;text-decoration:none;padding:9px 16px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;font-weight:500;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#555'">Dashboard</a>
+    <button class="nav-btn" onclick="scrollToHero()">Join Waitlist</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="hero-badge-dot"></span>Now accepting early access</div>
+        <h1 class="hero-title">Build <span class="wave">AI employees</span><br>in <span class="wave">minutes.</span></h1>
+        <p class="hero-sub">Tell Manu what your business does and get AI employees that handle the repetitive work automatically. No setup. No coding. No learning AI.</p>
+        <div id="hero-form-wrap">
+          <form class="waitlist-wrap" onsubmit="submitWaitlist(event,'hero-ok','hero-form-wrap')">
+            <input id="hero-email" class="email-input" type="email" placeholder="Enter your work email" required>
+            <button class="join-btn" type="submit">Join Waitlist</button>
+          </form>
+        </div>
+        <div class="success-msg" id="hero-ok">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><polyline points="4.5,8 7,10.5 11.5,5.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          You're on the list — we'll be in touch soon.
+        </div>
+        <p class="hero-note">No credit card required. Limited early access.</p>
+      </div>
+
+      <!-- VIDEO 1 -->
+      <div class="hero-mockup-frame">
+        <div class="mock-bar">
+          <div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div>
+          <span class="mock-bar-label">Manu — AI Business Intelligence</span>
+        </div>
+        <video autoplay muted loop playsinline style="width:100%;display:block;border-radius:0 0 16px 16px">
+          <source src="ceo.mov" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div id="trust">
+  <div class="container">
+    <div class="trust-row">
+<div class="trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#fff"/><polyline points="4.5,8 7,10.5 11.5,5.5" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>No coding</div>
+      <div class="trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#fff"/><polyline points="4.5,8 7,10.5 11.5,5.5" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>No prompts</div>
+      <div class="trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#fff"/><polyline points="4.5,8 7,10.5 11.5,5.5" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>No consultants</div>
+      <div class="trust-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#fff"/><polyline points="4.5,8 7,10.5 11.5,5.5" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>No technical skills</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT MANUFLOW DOES -->
+<section id="what">
+  <div class="container">
+    <div class="inner">
+      <div class="reveal">
+        <div class="label">What Manuflow does</div>
+        <h2 class="section-title">You just <span class="wave">explain</span><br>your business.</h2>
+        <p class="section-sub">You don't build workflows. You don't configure agents. Manu figures everything out for you.</p>
+        <ul class="check-list">
+          <li><div class="chk">✓</div>What should be automated</li>
+          <li><div class="chk">✓</div>Which AI employees are needed</li>
+          <li><div class="chk">✓</div>How they work together</li>
+          <li><div class="chk">✓</div>How to improve over time</li>
+        </ul>
+      </div>
+      <div class="chat-card reveal">
+        <div class="cc-head">
+          <div class="manu-av">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <polygon points="12,2 21,7 12,12 3,7" stroke="black" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+              <polyline points="3,12 12,17 21,12" stroke="black" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+              <polyline points="3,17 12,22 21,17" stroke="black" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <div>
+            <div class="cc-name">Manu</div>
+            <div class="cc-status">● Active</div>
+          </div>
+        </div>
+        <div class="cc-body">
+          <div class="msg u">"We lose leads from email."</div>
+          <div class="msg m">
+            I found the issue.<br><br>
+            Creating:<br>
+            &nbsp;• CRM Agent<br>
+            &nbsp;• Sales Agent<br><br>
+            Ready to deploy?
+            <div><span class="deploy-btn">Deploy →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto">
+      <div class="label">How it works</div>
+      <h2 class="section-title">Three steps. That's it.</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-n">1</div>
+        <div class="step-title">Describe your business</div>
+        <div class="step-desc">Tell Manu what you do, how customers find you, and where you lose time. Plain English — nothing technical.</div>
+        <div class="step-pills"><span class="pill">What you do</span><span class="pill">How customers find you</span><span class="pill">Where you lose time</span></div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-n">2</div>
+        <div class="step-title">Get your AI employees</div>
+        <div class="step-desc">Manu creates the right team automatically. CRM, Sales, Support, Operations — no setup, no learning curve.</div>
+        <div class="step-pills"><span class="pill">CRM</span><span class="pill">Sales</span><span class="pill">Support</span><span class="pill">Operations</span></div>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-n">3</div>
+        <div class="step-title">Watch them work</div>
+        <div class="step-desc">Emails processed, leads captured, follow-ups sent, tasks completed — everything happens live in your dashboard.</div>
+        <div class="step-pills"><span class="pill">Live activity</span><span class="pill">Real results</span></div>
+      </div>
+    </div>
+
+    <!-- VIDEO 2 -->
+    <div class="reveal" style="margin-top:40px">
+      <img src="steps-preview.png" onclick="openLightbox(this)" style="width:100%;height:auto;display:block;border-radius:18px;cursor:zoom-in;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" onclick="closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;padding:24px">
+      <img id="lightbox-img" style="max-width:95vw;max-height:92vh;border-radius:12px;box-shadow:0 24px 80px rgba(0,0,0,.8);object-fit:contain">
+      <div style="position:absolute;top:20px;right:28px;color:#fff;font-size:28px;cursor:pointer;opacity:.6" onclick="closeLightbox()">✕</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE ACTIVITY -->
+<section id="activity">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto">
+      <div class="label">Live Activity</div>
+      <h2 class="section-title">Your AI workforce<br><span class="wave">never sleeps.</span></h2>
+      <p class="section-sub">Every action logged. Every result visible. Your team works 24/7.</p>
+    </div>
+    <div class="activity-grid">
+      <div class="feed-card reveal">
+        <div class="feed-head"><div class="pulse-dot"></div>Activity Feed</div>
+        <div class="feed-body" id="live-feed"></div>
+      </div>
+      <div class="dash-card reveal">
+        <div class="dash-head">Manuflow Dashboard</div>
+        <div class="dash-layout">
+          <div class="dash-sidebar">
+            <div class="si-item active"><div class="adot p"></div><span class="si-name">CRM Agent</span></div>
+            <div class="si-item"><div class="adot b"></div><span class="si-name">Sales Agent</span></div>
+            <div class="si-item"><div class="adot g"></div><span class="si-name">Support Agent</span></div>
+            <div class="si-item"><div class="adot gr"></div><span class="si-name">Manu</span></div>
+          </div>
+          <div class="dash-main">
+            <div class="db u">How many leads this week?</div>
+            <div class="db m">34 new leads captured. Sales Agent sent 28 follow-ups. 6 awaiting response — I'll flag them.</div>
+            <div class="db u">Great. Keep monitoring.</div>
+            <div class="db m">On it. I'll alert you if anything needs your attention.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY MANUFLOW -->
+<section id="why">
+  <div class="container">
+    <div class="reveal" style="max-width:560px">
+      <div class="label">Why Manuflow</div>
+      <h2 class="section-title">Other tools make<br>you <span class="wave">do the work.</span></h2>
+      <p class="section-sub">You describe the problem. Manu creates the solution. That's the difference.</p>
+    </div>
+    <div class="compare-wrap reveal">
+      <div class="compare-head">
+        <div class="ch-cell">Feature</div>
+        <div class="ch-cell">Other AI tools</div>
+        <div class="ch-cell">Manuflow</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-cell">Setup required</div>
+        <div class="cr-cell"><span class="xi">✕</span>Hours of configuration</div>
+        <div class="cr-cell"><span class="ci">✓</span>Works instantly</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-cell">Learning curve</div>
+        <div class="cr-cell"><span class="xi">✕</span>Learn prompts &amp; tools</div>
+        <div class="cr-cell"><span class="ci">✓</span>No learning needed</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-cell">Technical skills</div>
+        <div class="cr-cell"><span class="xi">✕</span>Required</div>
+        <div class="cr-cell"><span class="ci">✓</span>Not required</div>
+      </div>
+      <div class="compare-row">
+        <div class="cr-cell">Workflow management</div>
+        <div class="cr-cell"><span class="xi">✕</span>You manage everything</div>
+        <div class="cr-cell"><span class="ci">✓</span>Manu manages everything</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLE -->
+<section id="example">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto">
+      <div class="label">Real example</div>
+      <h2 class="section-title">A roofing company.<br>3 minutes.</h2>
+    </div>
+    <div class="example-card reveal">
+      <div class="example-col">
+        <div class="ex-label">The Problem</div>
+        <div class="ex-title">Too much manual work</div>
+        <ul class="prob-list">
+          <li>Too many emails</li>
+          <li>Leads get lost</li>
+          <li>Follow-ups forgotten</li>
+        </ul>
+      </div>
+      <div class="example-col">
+        <div class="ex-label">Manu Creates</div>
+        <div class="ex-title">"Found 3 opportunities."</div>
+        <ul class="agent-list">
+          <li><div class="adot p"></div>CRM Agent</li>
+          <li><div class="adot b"></div>Sales Agent</li>
+          <li><div class="adot g"></div>Support Agent</li>
+        </ul>
+      </div>
+      <div class="example-col">
+        <div class="ex-label">The Result</div>
+        <div class="ex-title">Everything handled.</div>
+        <ul class="res-list">
+          <li>Every lead captured</li>
+          <li>Every customer answered</li>
+          <li>Every follow-up sent</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- VIDEO 3 -->
+    <div class="video-slot-full reveal">
+      <video autoplay muted loop playsinline style="width:100%;height:100%;display:block">
+        <source src="3steps.mov" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container-sm">
+    <div class="reveal" style="text-align:center">
+      <div class="label">FAQ</div>
+      <h2 class="section-title">Questions answered.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">Do I need technical skills?<span class="faq-chevron">⌄</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. Tell Manu about your business in plain English. It handles everything from there.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">Do I need to learn AI agents?<span class="faq-chevron">⌄</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. Manu understands your business problems and creates the right agents automatically. You never touch an AI setting.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">Do I build the agents myself?<span class="faq-chevron">⌄</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. Manu creates your AI employees automatically based on what you describe about your business.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">What can AI employees do?<span class="faq-chevron">⌄</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sales, CRM, customer support, operations — and more over time as Manu learns your business.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">Is this a chatbot?<span class="faq-chevron">⌄</span></button>
+        <div class="faq-a"><div class="faq-a-inner">No. It's an AI workforce that performs real business work — capturing leads, sending follow-ups, updating your CRM, and more.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">What does it connect to?<span class="faq-chevron">⌄</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Email and CRM out of the box. More business tool integrations are coming soon.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="reveal">
+      <div class="label">Get started</div>
+      <h2 class="section-title">Ready to hire your<br>first <span class="wave">AI employee?</span></h2>
+      <p class="section-sub">Tell Manu about your business. Get AI employees in minutes. Watch them work live.</p>
+      <div class="cta-checks">
+        <div class="cta-chk"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><polyline points="4.5,8 7,10.5 11.5,5.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>AI employees in minutes</div>
+        <div class="cta-chk"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><polyline points="4.5,8 7,10.5 11.5,5.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>No setup required</div>
+        <div class="cta-chk"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><polyline points="4.5,8 7,10.5 11.5,5.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Watch them work live</div>
+      </div>
+      <div id="cta-form-wrap">
+        <form class="cta-form" onsubmit="submitWaitlist(event,'cta-ok','cta-form-wrap')">
+          <input class="cta-input" type="email" placeholder="Enter your work email" required>
+          <button class="cta-btn" type="submit">Join Waitlist</button>
+        </form>
+      </div>
+      <div class="cta-success" id="cta-ok">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#22c55e"/><polyline points="4.5,8 7,10.5 11.5,5.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        You're on the list — we'll be in touch soon.
+      </div>
+      <p class="cta-note">Limited early access. No credit card required.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">
+    <div class="logo-icon" style="width:28px;height:28px;border-radius:6px">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <polygon points="12,2 21,7 12,12 3,7" stroke="black" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+        <polyline points="3,12 12,17 21,12" stroke="black" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+        <polyline points="3,17 12,22 21,17" stroke="black" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+    <span class="foot-name">Manuflow</span>
+  </div>
+  <span class="foot-copy">© 2025 Manuflow. All rights reserved.</span>
+</footer>
+
+<script>
+function scrollToHero(){
+  document.getElementById('hero').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>document.getElementById('hero-email').focus(),600);
+}
+
+function submitWaitlist(e,okId,wrapId){
+  e.preventDefault();
+  const input = e.target.querySelector('input[type="email"]');
+  const email = input.value.trim();
+  const list = JSON.parse(localStorage.getItem('manuflow_waitlist') || '[]');
+  if(!list.find(x=>x.email===email)){
+    list.push({email, date: new Date().toISOString()});
+    localStorage.setItem('manuflow_waitlist', JSON.stringify(list));
+  }
+  document.getElementById(wrapId).style.display='none';
+  document.getElementById(okId).classList.add('show');
+}
+
+function faqToggle(btn){
+  const ans=btn.nextElementSibling;
+  const open=btn.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(q=>{q.classList.remove('open');q.nextElementSibling.classList.remove('open')});
+  if(!open){btn.classList.add('open');ans.classList.add('open')}
+}
+
+function openLightbox(img){
+  const lb=document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src=img.src;
+  lb.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').style.display='none';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+
+const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+const feedData=[
+  {agent:'CRM Agent',action:'New lead captured from email',dot:'p',time:'just now'},
+  {agent:'Sales Agent',action:'Follow-up email sent to James R.',dot:'b',time:'1m ago'},
+  {agent:'Support Agent',action:'Customer question resolved',dot:'g',time:'3m ago'},
+  {agent:'Manu',action:'Monitoring business performance',dot:'gr',time:'5m ago'},
+  {agent:'CRM Agent',action:'Lead score updated',dot:'p',time:'8m ago'},
+  {agent:'Sales Agent',action:'Scheduled call with Sarah K.',dot:'b',time:'11m ago'},
+];
+function renderFeed(){
+  const c=document.getElementById('live-feed');
+  c.innerHTML='';
+  feedData.forEach((d,i)=>{
+    const el=document.createElement('div');
+    el.className='feed-item';
+    el.style.opacity='0';
+    el.innerHTML=`<div class="adot ${d.dot}"></div><div class="fi-content"><div class="fi-agent">${d.agent}</div><div class="fi-action">${d.action}</div></div><div class="fi-time">${d.time}</div>`;
+    c.appendChild(el);
+    setTimeout(()=>{el.style.transition='opacity .4s';el.style.opacity='1';},150+i*130);
+  });
+}
+const feedObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){renderFeed();feedObs.disconnect();}});
+},{threshold:.2});
+feedObs.observe(document.getElementById('live-feed'));
+</script>
+</body>
+</html>
