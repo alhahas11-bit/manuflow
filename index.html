@@ -24,20 +24,96 @@
 
 <!-- Structured Data (Google rich results) -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Manuflow",
-  "url": "https://aiqualitys.com",
-  "description": "Manuflow builds AI employees for your business automatically. No coding, no setup required.",
-  "applicationCategory": "BusinessApplication",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Manuflow",
+    "url": "https://aiqualitys.com",
+    "logo": "https://aiqualitys.com/steps-preview.png",
+    "description": "Manuflow builds AI employees for your business automatically. No coding, no setup required.",
+    "sameAs": []
   },
-  "operatingSystem": "Web"
-}
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Manuflow",
+    "url": "https://aiqualitys.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://aiqualitys.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Manuflow",
+    "url": "https://aiqualitys.com",
+    "description": "Manuflow builds AI employees for your business automatically. No coding, no setup required.",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "operatingSystem": "Web"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need technical skills to use Manuflow?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Tell Manu about your business in plain English. It handles everything from there."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to learn AI agents?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Manu understands your business problems and creates the right agents automatically. You never touch an AI setting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I build the AI agents myself?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Manu creates your AI employees automatically based on what you describe about your business."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can Manuflow AI employees do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sales, CRM, customer support, operations — and more over time as Manu learns your business."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Manuflow a chatbot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. It is an AI workforce that performs real business work — capturing leads, sending follow-ups, updating your CRM, and more."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Manuflow connect to?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Email and CRM out of the box. More business tool integrations are coming soon."
+        }
+      }
+    ]
+  }
+]
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -622,7 +698,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:22px 40px
     </div>
     <span class="foot-name">Manuflow</span>
   </div>
-  <span class="foot-copy">© 2025 Manuflow. All rights reserved.</span>
+  <span class="foot-copy">© 2025 Manuflow (aiqualitys.com). All rights reserved.</span>
 </footer>
 
 <script>
